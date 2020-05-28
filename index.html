@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,24 +8,47 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 </head>
+
 <body>
-    <div class="content grid">
-        <div class="menu">
-            <div class="parameters">
-                <p>m = <input type="text" value="1" disabled="true" class="m"> кг</p>
-                <p>V = <input type="text" value="90" class="v"> м/с</p>
-                <p>α = <input type="text" value="45" class="alpha"> °</p>
-                <p>k = <input type="text" value="0.01" class="k"> кг/с</p>
+    <div class="content">
+        <h1>Движение тела в поле тяжести с учётом сопротивления воздуха</h1>
+        <div class="grid">
+            <div class="menu">
+                <div class="parameters">
+                    <p>m = <input type="text" value="1" disabled="true" class="m"> кг</p>
+                    <p>V = <input type="text" value="90" class="v"> м/с</p>
+                    <p>α = <input type="text" value="45" class="alpha"> °</p>
+                    <p>k = <input type="text" value="0.01" class="k"> кг/с</p>
+                </div>
+                <div class="buttons">
+                    <button class="run-button">Run</button>
+                </div>
+                <div class="info">
+                    <p>Скорость: <span class="speed">0.00</span> м/c</p>
+                </div>
             </div>
-            <div class="buttons">
-                <button class="run-button">Run</button>
-            </div>
-            <div class="info">
-                <p>Скорость: <span class="speed">0.00</span> м/c</p>
-            </div>
+            <canvas width="700" height="350" class="canvas"></canvas>
         </div>
-        <canvas width="700" height="350" class="canvas"></canvas>
+        <p>Цель задания - выяснить, как изменится траектория тела, если учитывать сопротивление воздуха</p>
+        <p>Рассмотрим случай когда сила сопротивления воздуха противоположно направлена с вектором скорости, и её величина пропорциональна скорости:</p>
+        <img src="formuls/1.png" alt="F">
+        <p>Второй закон приобретает вид:</p>
+        <img src="formuls/2.png" alt="F">
+        <p>Отсюда:</p>
+        <img src="formuls/3.png" alt="F">
+        <p>Запишем это равенство в скалярном виде:</p>
+        <img src="formuls/4.png" alt="F">
+        <p>Попробуем найти решения этих уравнений при помощи численных методов. При помощи численных методов мы получим лишь приближённое решение. Для этого введём на временной оси сетку: выберем число dt и будем рассматривать моменты времени вида 0, dt, 2dt, dt...</p>
+        <p>Заменим в уравнениях ускорение на среднюю скорость изменения скорости, рассматривая движение тела на промежутке времени dt:</p>
+        <img src="formuls/5.png" alt="F">
+        <p>Теперь подставим полученные аппроксимации в наши уравнения:</p>
+        <img src="formuls/6.png" alt="F">
+        <p>Отсюда:</p>
+        <img src="formuls/7.png" alt="F">
+        <p>аналогичным образом выразим закон движения тела и получим:</p>
+        <img src="formuls/8.png" alt="F">
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>

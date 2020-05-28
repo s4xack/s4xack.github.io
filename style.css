@@ -22,6 +22,7 @@
 input {
     width: 30px
 }
-.chart {
-    width: 1000px;
+
+h1 {
+    text-align: center;
 }

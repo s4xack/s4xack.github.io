@@ -129,7 +129,7 @@ function animate()
     let dt = 0.02;
     let t = dt;
     let v = parseFloat(vInput.value);
-    let K = parseFloat(kInput.value);
+    let K = parseFloat(kInput.value) / parseFloat(mInput.value);
     let g = 9.8;
     let angle = parseFloat(angleInput.value) * Math.PI / 180;
     
