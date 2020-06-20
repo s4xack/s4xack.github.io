@@ -1,0 +1,32 @@
+.content {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 4fr 6fr;
+}
+
+.canvas {
+    border: 2px solid #000;
+    margin: 0;
+    width: 600px;
+    height: 600px;
+}
+
+.menu {
+    border: 1px solid #000;
+    padding: 10px;
+}
+.on {
+    background-color: grey;
+}
+
+input {
+    width: 30px
+}
+
+h1 {
+    text-align: center;
+}

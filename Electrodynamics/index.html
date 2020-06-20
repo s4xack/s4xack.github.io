@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Электродинамика</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <h1>Движение заряженной частицы в кулоновском поле</h1>
+        <div class="grid">
+            <div class="menu">
+                <div class="parameters">
+                    <p>m = <input type="text" value="0.02" class="m"> кг</p>
+                    <p>V = <input type="text" value="0.1" class="v"> м/с</p>
+                    <p>α = <input type="text" value="30" class="alpha"> °</p>
+                    <p>q = <input type="text" value="0.01" class="q"> Кл</p>
+                    <p>R = <input type="text" value="2" class="R"> М</p>
+                    <p>Q = <input type="text" value="0.05" class="Q"> Кл</p>
+                </div>
+                <div class="buttons">
+                    <button class="run-button">Run</button>
+                    <button class="stop-button">Stop</button>
+                    <button class="tr-button">Draw</button>
+                </div>
+            </div>
+            <canvas width="600" height="600" class="canvas"></canvas>
+        </div>
+        
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
