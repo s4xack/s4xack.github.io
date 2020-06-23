@@ -30,3 +30,15 @@ input {
 h1 {
     text-align: center;
 }
+.charts {
+    display: grid;
+    grid-template-columns: 5fr 5fr;
+}
+
+.chart1 {
+    width: 500px;
+}
+
+.chart2 {
+    width: 500px;
+}

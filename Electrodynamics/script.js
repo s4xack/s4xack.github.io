@@ -1,4 +1,6 @@
 let canvas = document.querySelector(".canvas");
+let chart1 = document.querySelector(".chart1");
+let chart2 = document.querySelector(".chart2");
 
 let runButton = document.querySelector(".run-button");
 let stopButton = document.querySelector(".stop-button");
@@ -12,6 +14,8 @@ let QInput = document.querySelector(".Q");
 let RInput = document.querySelector(".R");
 
 let ctx = canvas.getContext("2d");
+let ch1 = null;
+let ch2 = null;
 
 ctx.fillStyle = "black";
 ctx.strokeStyle = "black";
@@ -244,6 +248,98 @@ function animate()
     });
 }
 
+function drawChart1(labels, dataset, context)
+{
+    if (ch1 != null)
+        ch1.destroy();
+    ch1 = new Chart(context, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Кинетическая энергия',
+                backgroundColor: "#ff6361",
+                borderColor: "#ff6361",
+                data: dataset,
+                fill: false,
+            }]
+        },
+        options: {
+            responsive: false,
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 't, с'
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Е, Дж'
+                    }
+                }]
+            }
+        }
+    });
+}
+
+function drawChart2(labels, dataset, context)
+{
+    if (ch2 != null)
+        ch2.destroy();
+    ch2 = new Chart(context, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Потенциальная энергия',
+                backgroundColor: "#58508d",
+                borderColor: "#58508d",
+                data: dataset,
+                fill: false,
+            }]
+        },
+        options: {
+            responsive: false,
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 't, с'
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Е, Дж'
+                    }
+                }]
+            }
+        }
+    });
+}
+
 stopButton.disabled = true;
 
 drawPoint(prepareCoordinates({x: -1, y: 0}));
@@ -260,6 +356,7 @@ runButton.addEventListener("click", () =>
     animate();
     
 });
+
 
 trButton.addEventListener("click", () => 
 {
@@ -279,9 +376,10 @@ trButton.addEventListener("click", () =>
     let angle = parseFloat(angleInput.value) * Math.PI / 180;
     
     trajectory = [];
-    speedChartData = [];
-    speedChartData.push({x: 0, y: v})
-    
+    let time = [];
+    let kinetic = [];
+    let potential = [];
+
     let pre = 
     {
         position:
@@ -296,10 +394,30 @@ trButton.addEventListener("click", () =>
         }
     }
 
-    for (let i = 0; i < 1000; ++i)
+    for (let i = 0; i < 1001; ++i)
     {
         let current = calculate(pre, dt, m, q, Q, R);
         trajectory.push(prepareCoordinates(current.position));
+        
+        if (i % 25 == 0)
+        {
+            time.push((i / 50).toFixed(2));
+            
+            let v = Math.sqrt(pre.v.x * pre.v.x + pre.v.y * pre.v.y);
+            let e = (m * v * v / 2);
+            kinetic.push(e);
+
+            let r = distance(pre.position, {x : 0, y: 0});
+            let a =
+            {
+                x: current.v.x - pre.v.x,
+                y: current.v.y - pre.v.y
+            };
+            a = Math.sqrt(a.x * a.x + a.y * a.y);
+            let u = (a / r);
+            potential.push(u);
+        }
+
         pre = current;
 
         if (current.position.y == -5 || current.position.y == 5 || 
@@ -313,6 +431,9 @@ trButton.addEventListener("click", () =>
     drawPoint(prepareCoordinates({x: -R, y: 0}));
     drawPoint(prepareCoordinates({x: 0, y: 0}));
     drawLine(trajectory);
+    drawChart1(time, kinetic, chart1.getContext("2d"));
+    drawChart2(time, potential, chart2.getContext("2d"));
+
 
     runButton.disabled = false;
     trButton.disabled = false;
