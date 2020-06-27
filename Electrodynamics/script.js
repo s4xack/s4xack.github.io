@@ -257,7 +257,7 @@ function drawChart1(labels, dataset, context)
         data: {
             labels: labels,
             datasets: [{
-                label: 'Кинетическая энергия',
+                label: 'mv^2',
                 backgroundColor: "#ff6361",
                 borderColor: "#ff6361",
                 data: dataset,
@@ -286,7 +286,7 @@ function drawChart1(labels, dataset, context)
                     display: true,
                     scaleLabel: {
                         display: true,
-                        labelString: 'Е, Дж'
+                        labelString: 'mv^2, Дж'
                     }
                 }]
             }
@@ -303,7 +303,7 @@ function drawChart2(labels, dataset, context)
         data: {
             labels: labels,
             datasets: [{
-                label: 'Потенциальная энергия',
+                label: 'a/r',
                 backgroundColor: "#58508d",
                 borderColor: "#58508d",
                 data: dataset,
@@ -332,7 +332,7 @@ function drawChart2(labels, dataset, context)
                     display: true,
                     scaleLabel: {
                         display: true,
-                        labelString: 'Е, Дж'
+                        labelString: 'a/r, Дж'
                     }
                 }]
             }
